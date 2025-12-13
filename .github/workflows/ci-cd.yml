@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-test:
-    runs-on: ubuntu-latest  # You can change this to windows-latest or macos-latest if needed
+    runs-on: ubuntu-latest  # Use the latest Ubuntu image for the runner
 
     steps:
     - name: Checkout code
@@ -33,13 +33,18 @@ jobs:
         source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
         sdk install kotlin  # Install the latest stable version of Kotlin
 
-    - name: Check if gradlew exists and is executable  # Debug step
+    # Debugging step to check if gradlew exists and is executable
+    - name: Check if gradlew exists and is executable
       run: |
         ls -l ./kotlin/gradlew  # List the gradlew file in the 'kotlin' folder and check its permissions
         file ./kotlin/gradlew   # Check if gradlew is an executable file in the 'kotlin' folder
 
     - name: Build with Gradle
       run: ./kotlin/gradlew build  # Run Gradle build using the gradlew file in the 'kotlin' folder
+
+    # Run tests with Gradle (optional step, can be removed if no tests)
+    - name: Run tests with Gradle
+      run: ./kotlin/gradlew test  # Run tests using the gradlew file in the 'kotlin' folder
 
     - name: Package JAR
       run: ./kotlin/gradlew jar  # Package the project into a JAR file using gradlew in the 'kotlin' folder

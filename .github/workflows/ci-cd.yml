@@ -1,0 +1,43 @@
+name: Overtime Calculator CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Set up Kotlin
+      uses: olafurpg/setup-kotlin@v1
+      with:
+        kotlin-version: '1.6.10'
+
+    - name: Build with Gradle
+      run: ./gradlew build  # Build the project using Gradle
+
+    - name: Run tests with Gradle
+      run: ./gradlew test  # Run tests using Gradle
+
+    - name: Package JAR
+      run: ./gradlew jar  # Packages the application into a JAR file
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: overtime-calculator-jar
+        path: build/libs/*.jar

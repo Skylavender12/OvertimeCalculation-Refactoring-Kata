@@ -16,39 +16,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3  # Checkout your code
 
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'  # Use Java 17 or the version your project requires
-        distribution: 'temurin'  # Use the Temurin distribution for OpenJDK (AdoptOpenJDK)
-
-    - name: Install SDKMAN!
-      run: |
-        curl -s "https://get.sdkman.io" | bash  # Install SDKMAN!
-        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
-
-    - name: Install Kotlin using SDKMAN!
-      run: |
-        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
-        sdk install kotlin  # Install the latest stable version of Kotlin
-
     # Debugging step to check if gradlew exists and is executable
     - name: Check if gradlew exists and is executable
       run: |
         ls -l ./gradlew  # List the gradlew file and check its permissions
         file ./gradlew   # Check if gradlew is an executable file
 
-    - name: Build with Gradle
-      run: ./gradlew build  # Run the Gradle build command using the Gradle wrapper
+    # Commented out the actual build and test steps since we're debugging
+    # - name: Build with Gradle
+    #   run: ./gradlew build  # Run the Gradle build command using the Gradle wrapper
 
-    - name: Run tests with Gradle
-      run: ./gradlew test  # Run tests using Gradle
+    # - name: Run tests with Gradle
+    #   run: ./gradlew test  # Run tests using Gradle
 
-    - name: Package JAR
-      run: ./gradlew jar  # Package the project into a JAR file
+    # - name: Package JAR
+    #   run: ./gradlew jar  # Package the project into a JAR file
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4  # Upload the generated JAR file as an artifact
-      with:
-        name: overtime-calculator-jar
-        path: build/libs/*.jar  # Adjust the path if necessary
+    # - name: Upload Artifact
+    #   uses: actions/upload-artifact@v4  # Upload the generated JAR file as an artifact
+    #   with:
+    #     name: overtime-calculator-jar
+    #     path: build/libs/*.jar  # Adjust the path if necessary

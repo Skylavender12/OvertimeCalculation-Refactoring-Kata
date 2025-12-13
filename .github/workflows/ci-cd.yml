@@ -18,9 +18,10 @@ jobs:
 
     # Debugging step to check if gradlew exists and is executable
     - name: Check if gradlew exists and is executable
-      run: |
-        ls -l gradlew  
-        file gradlew   
+    run: |
+    ls -l ./kotlin/gradlew  
+    file ./kotlin/gradlew   
+ 
 
     # Commented out the actual build and test steps since we're debugging
     # - name: Build with Gradle

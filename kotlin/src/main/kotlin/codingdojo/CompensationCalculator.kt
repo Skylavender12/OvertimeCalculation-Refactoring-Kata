@@ -1,4 +1,5 @@
 package codingdojo
+// This change is to trigger the CI/CD pipeline
 
 import java.math.BigDecimal
 import java.time.Duration

@@ -22,10 +22,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'  # Use Temurin distribution for OpenJDK (AdoptOpenJDK)
 
-    - name: Set up Kotlin
-      uses: olafurpg/setup-kotlin@v1  # Set up Kotlin
-      with:
-        kotlin-version: '1.6.10'  # Use the version you want for Kotlin
+    # Install SDKMAN! and Kotlin
+    - name: Install SDKMAN!
+      run: |
+        curl -s "https://get.sdkman.io" | bash  # Install SDKMAN!
+        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
+
+    - name: Install Kotlin using SDKMAN!
+      run: |
+        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
+        sdk install kotlin  # Install the latest stable version of Kotlin
 
     - name: Check if gradlew exists and is executable  # Debug step
       run: |

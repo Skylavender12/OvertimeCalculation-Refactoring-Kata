@@ -19,8 +19,8 @@ jobs:
     # Debugging step to check if gradlew exists and is executable
     - name: Check if gradlew exists and is executable
       run: |
-        ls -l ./gradlew  # List the gradlew file and check its permissions
-        file ./gradlew   # Check if gradlew is an executable file
+        ls -l gradlew  
+        file gradlew   
 
     # Commented out the actual build and test steps since we're debugging
     # - name: Build with Gradle

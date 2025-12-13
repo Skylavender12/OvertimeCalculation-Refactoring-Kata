@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-test:
-    runs-on: ubuntu-latest  # You can change this to windows-latest or macos-latest if needed
+    runs-on: ubuntu-latest  # Use the latest Ubuntu image for the runner
 
     steps:
     - name: Checkout code
@@ -41,15 +41,12 @@ jobs:
     - name: Build with Gradle
       run: ./kotlin/gradlew build  # Run Gradle build using the gradlew file in the 'kotlin' folder
 
-    # Removed the test step since the 'test' task was not found
-    # - name: Run tests with Gradle
-    #   run: ./kotlin/gradlew test  # Run tests using the gradlew file in the 'kotlin' folder
-
-    - name: Package JAR
-      run: ./kotlin/gradlew jar  # Package the project into a JAR file using gradlew in the 'kotlin' folder
+    # Removed the jar task since it's causing an issue and it's not needed
+    # - name: Package JAR
+    #   run: ./kotlin/gradlew jar  # Package the project into a JAR file using gradlew in the 'kotlin' folder
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v4  # Upload the generated JAR file as an artifact
+      uses: actions/upload-artifact@v4  # Upload the generated artifact as an artifact (e.g., build output)
       with:
-        name: overtime-calculator-jar
-        path: build/libs/*.jar  # Path to the JAR file, adjust if necessary
+        name: overtime-calculator-artifact
+        path: build/libs/*  # Adjust the path if needed, or leave it to collect all build artifacts

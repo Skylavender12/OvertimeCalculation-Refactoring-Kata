@@ -32,6 +32,12 @@ jobs:
         source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
         sdk install kotlin  # Install the latest stable version of Kotlin
 
+    # Debugging step to check if gradlew exists and is executable
+    - name: Check if gradlew exists and is executable
+      run: |
+        ls -l ./gradlew  # List the gradlew file and check its permissions
+        file ./gradlew   # Check if gradlew is an executable file
+
     - name: Build with Gradle
       run: ./gradlew build  # Run the Gradle build command using the Gradle wrapper
 

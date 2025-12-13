@@ -3,10 +3,10 @@ name: Overtime Calculator CI/CD
 on:
   push:
     branches:
-      - main
+      - main  # Workflow should trigger when changes are pushed to the main branch
   pull_request:
     branches:
-      - main
+      - main  # Workflow should trigger for pull requests to the main branch
 
 jobs:
   build-test:
@@ -28,13 +28,13 @@ jobs:
         kotlin-version: '1.6.10'
 
     - name: Build with Gradle
-      run: ./gradlew build  # Build the project using Gradle
+      run: ./gradlew build
 
     - name: Run tests with Gradle
-      run: ./gradlew test  # Run tests using Gradle
+      run: ./gradlew test
 
     - name: Package JAR
-      run: ./gradlew jar  # Packages the application into a JAR file
+      run: ./gradlew jar
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4

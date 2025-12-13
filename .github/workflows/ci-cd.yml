@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-test:
-    runs-on: ubuntu-latest  # You can change this to windows-latest or macos-latest if needed
+    runs-on: ubuntu-latest  # Use the latest Ubuntu image for the runner
 
     steps:
     - name: Checkout code
@@ -20,12 +20,17 @@ jobs:
       uses: actions/setup-java@v3  # Setup Java 17 or the version your project requires
       with:
         java-version: '17'
-        distribution: 'temurin'  # Use Temurin distribution for OpenJDK
+        distribution: 'temurin'  # Use Temurin distribution for OpenJDK (AdoptOpenJDK)
 
-    - name: Set up Kotlin
-      uses: olafurpg/setup-kotlin@v1  # Set up Kotlin
-      with:
-        kotlin-version: '1.6.10'  # Use the version you want for Kotlin
+    - name: Install SDKMAN!
+      run: |
+        curl -s "https://get.sdkman.io" | bash  # Install SDKMAN!
+        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
+
+    - name: Install Kotlin using SDKMAN!
+      run: |
+        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
+        sdk install kotlin  # Install the latest stable version of Kotlin
 
     - name: Check if gradlew exists and is executable  # Debug step
       run: |

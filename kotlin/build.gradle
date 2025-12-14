@@ -1,6 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
-    id 'java'
+    id 'java'  // Ensure the Java plugin is applied
 }
 
 group = 'org.codingdojo'
@@ -14,16 +14,18 @@ dependencies {
     // Kotlin standard library
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
-    // JUnit 5 dependencies
+    // JUnit 5 dependencies for testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
+// Enable JUnit 5 testing
 test {
-    useJUnitPlatform()  // Enable JUnit 5 testing
+    useJUnitPlatform()  // This tells Gradle to use JUnit 5 for running tests
 }
 
+// Define the jar task to package the project into a JAR file
 jar {
     archiveBaseName.set('overtime-calculator')  // Name of the output JAR
     archiveVersion.set('1.0')  // Version of the JAR

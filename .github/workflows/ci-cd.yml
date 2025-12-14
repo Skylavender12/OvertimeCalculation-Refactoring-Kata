@@ -41,6 +41,7 @@ jobs:
     - name: Build with Gradle
       run: ./kotlin/gradlew build  # Run Gradle build using the gradlew file in the 'kotlin' folder
 
+    # Explicitly run the jar task to ensure the JAR file is generated
     - name: Run the jar task explicitly
       run: ./kotlin/gradlew jar  # Run the Gradle jar task explicitly to ensure the JAR is generated
 

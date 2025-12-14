@@ -22,11 +22,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'  # Use Temurin distribution for OpenJDK (AdoptOpenJDK)
 
-    # Create build directory manually if needed
-    - name: Create build directory
-      run: |
-        mkdir -p build/libs  # Create the build/libs directory if it doesn't exist
-
     # Install SDKMAN! and Kotlin
     - name: Install SDKMAN!
       run: |
@@ -45,6 +40,9 @@ jobs:
 
     - name: Build with Gradle
       run: ./kotlin/gradlew build  # Run Gradle build using the gradlew file in the 'kotlin' folder
+
+    - name: Run the jar task explicitly
+      run: ./kotlin/gradlew jar  # Run the Gradle jar task explicitly to ensure the JAR is generated
 
     # Debugging step to list contents of the build directory
     - name: List contents of build directory

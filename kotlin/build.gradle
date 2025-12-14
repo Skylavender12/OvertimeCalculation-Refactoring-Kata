@@ -24,3 +24,9 @@ dependencies {
 test {
     useJUnitPlatform()  // This tells Gradle to use JUnit 5 for running tests
 }
+
+// Define the jar task to package the project into a JAR file
+jar {
+    archiveBaseName.set('overtime-calculator')  // Name of the JAR file
+    archiveVersion.set('1.0')  // Version of the JAR file
+}

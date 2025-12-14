@@ -33,8 +33,7 @@ jobs:
         source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN!
         sdk install kotlin  # Install the latest stable version of Kotlin
 
-    # Debugging step to check if gradlew exists and is executable
-    - name: Check if gradlew exists and is executable
+    - name: Check if gradlew exists and is executable  # Debug step
       run: |
         ls -l ./kotlin/gradlew  # List the gradlew file in the 'kotlin' folder and check its permissions
         file ./kotlin/gradlew   # Check if gradlew is an executable file in the 'kotlin' folder
@@ -47,7 +46,6 @@ jobs:
       run: |
         ls -lR build/  # List all files in the build directory recursively
 
-    # Upload Artifact (adjust path based on the debug output)
     - name: Upload Artifact
       uses: actions/upload-artifact@v4  # Upload the generated JAR file as an artifact
       with:

@@ -22,6 +22,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'  # Use Temurin distribution for OpenJDK (AdoptOpenJDK)
 
+    # Create build directory manually if needed
+    - name: Create build directory
+      run: |
+        mkdir -p build/libs  # Create the build/libs directory if it doesn't exist
+
     # Install SDKMAN! and Kotlin
     - name: Install SDKMAN!
       run: |

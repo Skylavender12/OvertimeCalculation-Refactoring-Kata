@@ -1,94 +1,41 @@
-name: Overtime Calculator CI/CD 
+name: Overtime Calculator CI/CD
 
-  
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-on: 
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
 
-  push: 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    branches: 
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 
-      - main  # Trigger on push to the main branch 
+    - name: Install SDKMAN!
+      run: |
+        curl -s "https://get.sdkman.io" | bash
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-  pull_request: 
+    - name: Install Kotlin using SDKMAN!
+      run: |
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
+        sdk install kotlin
 
-    branches: 
+    - name: Check if gradlew exists and is executable
+      run: |
+        ls -l ./kotlin/gradlew
+        file ./kotlin/gradlew
 
-      - main  # Trigger on pull request to the main branch 
-
-  
-
-jobs: 
-
-  build-test: 
-
-    runs-on: ubuntu-latest  # Use the latest Ubuntu image for the runner 
-
-  
-
-    steps: 
-
-    - name: Checkout code 
-
-      uses: actions/checkout@v3  # Checkout your code from the repository 
-
-  
-
-    - name: Set up Java 
-
-      uses: actions/setup-java@v3  # Setup Java 17 or the version your project requires 
-
-      with: 
-
-        java-version: '17' 
-
-        distribution: 'temurin'  # Use Temurin distribution for OpenJDK (AdoptOpenJDK) 
-
-  
-
-    # Install SDKMAN! and Kotlin 
-
-    - name: Install SDKMAN! 
-
-      run: | 
-
-        curl -s "https://get.sdkman.io" | bash  # Install SDKMAN! 
-
-        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN! 
-
-  
-
-    - name: Install Kotlin using SDKMAN! 
-
-      run: | 
-
-        source "$HOME/.sdkman/bin/sdkman-init.sh"  # Initialize SDKMAN! 
-
-        sdk install kotlin  # Install the latest stable version of Kotlin 
-
-  
-
-    - name: Check if gradlew exists and is executable  # Debug step 
-
-      run: | 
-
-        ls -l ./kotlin/gradlew  # List the gradlew file in the 'kotlin' folder and check its permissions 
-
-        file ./kotlin/gradlew   # Check if gradlew is an executable file in the 'kotlin' folder 
-
-  
-
-    - name: Build with Gradle 
-
-      run: ./kotlin/gradlew build  # Run Gradle build using the gradlew file in the 'kotlin' folder 
-  
-
-    - name: Upload Artifact 
-
-      uses: actions/upload-artifact@v4  # Upload the generated artifact as an artifact (e.g., build output) 
-
-      with: 
-
-        name: overtime-calculator-artifact 
-
-        path: build/libs/*  # Adjust the path if needed, or leave it to collect all build artifacts 
+    - name: Build with Gradle
+      run: ./kotlin/gradlew build

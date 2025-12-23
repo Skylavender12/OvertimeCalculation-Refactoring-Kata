@@ -1,5 +1,5 @@
 package codingdojo
-
+//This is to test whether the cicd pipeline is functioneing
 import java.math.BigDecimal
 import java.time.Duration
 
